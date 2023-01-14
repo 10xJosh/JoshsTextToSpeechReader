@@ -1,0 +1,61 @@
+﻿<Window x:Class="JoshsTextToSpeechReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JoshsTextToSpeechReader"
+        mc:Ignorable="d"
+        Title="Josh's Text To Speech File Reader" SizeToContent="Manual" 
+        ResizeMode="CanResizeWithGrip" MinHeight="400" MinWidth="1090">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19" MaxHeight="19"></RowDefinition>
+            <RowDefinition Name="GridDisplaySection" Height="455*" ></RowDefinition>
+            <RowDefinition Height="120" MaxHeight="120"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File" Grid.Row="0">
+                <MenuItem Header="Import" Click="MenuImport_Click"></MenuItem>
+                <MenuItem Header="Exit" Click="MenuExit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Settings" Grid.Row="0">
+                <MenuItem Header="Font Settings" Click="MenuChangeFont_Click"></MenuItem>
+                <MenuItem Header="Voice Settings" Click="MenuChangeVoice_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="?">
+                <MenuItem Header="About..." Click="MenuAbout_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Button Name="btnRead"  Content="▷" Margin="485,37,485,47" 
+                Grid.Row="2" Width="100" 
+                Click="btnRead_Click"  Height="36"/>
+        <Button Name="btnPause" Content="Pause" Margin="475,37,475,47" 
+                Grid.Row="2" Width="100" 
+                Click="btnPause_Click"  Height="36" Visibility="Hidden"/>
+        <Button Name="btnClear" Content="Clear" Margin="610,37,360,47" 
+                Grid.Row="2" Width="100" 
+                Click="btnClear_Click" Height="36" />
+        <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+            <TextBox Name="txtDisplay" Grid.Row="1" TextWrapping="Wrap" FontSize="32"
+                 Width="{Binding ElementName=GridDisplaySection}" AcceptsReturn="True" />
+        </ScrollViewer>
+
+        <Slider Name="sldrVolume" Grid.Row="2"
+                Width="120" Margin="768,37,62,37" 
+                TickFrequency="10"
+                TickPlacement="Both"
+                ValueChanged="sldrVolume_ValueChanged"
+                Maximum="100" Minimum="0" Value="100"/>
+        <Label  Grid.Row="2" Content="Volume" Margin="707,35,187,50" 
+                Height="25" Width="55" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"/>
+        <ComboBox Name="cmboReadingSpeed"
+                  Margin="382,43,628,53" Grid.Row="2" Height="24" Width="90"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  SelectionChanged="cmboReadingSpeed_Changed"
+                  />
+        <Label Content="Speed:" Margin="327,42,723,53"  Width="50"
+               Height="25" Grid.Row="2"
+               />
+    </Grid>
+</Window>
