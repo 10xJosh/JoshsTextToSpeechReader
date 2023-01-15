@@ -27,6 +27,7 @@ namespace JoshsTextToSpeechReader
             SpeechMethods.TextToSpeech.SpeakCompleted += CompletedSpeech;
             SpeechMethods.TextToSpeech.SpeakProgress += SpeechHighlight;
             FrmChangeFont.GetChangedFontSettings += GetUpdatedFontSettings;
+            FrmChangeVoice.VoiceChanged += ResetPlayButton;
             
         }
 
@@ -179,6 +180,14 @@ namespace JoshsTextToSpeechReader
         {
             txtDisplay.Focus(); //this is required for the highlight feature to work
             txtDisplay.Select(e.CharacterPosition, e.Text.Length);
+        }
+
+        public void ResetPlayButton()
+        {
+            btnPause.Visibility = Visibility.Hidden;
+            btnRead.Content = "▷";
+            btnRead.Visibility = Visibility.Visible;
+            speechMethods.IsTextToSpeechPaused = false;
         }
     }
 }
