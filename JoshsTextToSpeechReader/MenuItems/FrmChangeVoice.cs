@@ -28,7 +28,7 @@ namespace JoshsTextToSpeechReader.MenuItems
             InitializeSpeechSettings();
         }
 
-        public void btnVoiceConfirm_Click(object sender, EventArgs e)
+        private void btnVoiceConfirm_Click(object sender, EventArgs e)
         {
             if (cmboVoiceList.SelectedIndex == -1)
             {
@@ -39,18 +39,13 @@ namespace JoshsTextToSpeechReader.MenuItems
 
                 if (speechMethods.IsTextToSpeechPaused == true)
                 {
-                    SpeechMethods.TextToSpeech.SpeakAsyncCancelAll();
-                    speechMethods.UpdateVoiceSettings((string)cmboVoiceList.SelectedItem);
-                    SpeechMethods.TextToSpeech.Resume();
+                    UpdateVoice();
                     VoiceChanged();
                     this.Close();
                 }
                 else
                 {
-                    speechMethods.PauseReadingText();
-                    SpeechMethods.TextToSpeech.SpeakAsyncCancelAll();
-                    speechMethods.UpdateVoiceSettings((string)cmboVoiceList.SelectedItem);
-                    SpeechMethods.TextToSpeech.Resume();
+                    UpdateVoice();
                     VoiceChanged();
                     this.Close();
                 }
@@ -67,6 +62,13 @@ namespace JoshsTextToSpeechReader.MenuItems
             {
                 cmboVoiceList.Items.Add(voice.VoiceInfo.Name);
             }
+        }
+        
+        public void UpdateVoice()
+        {
+            SpeechMethods.TextToSpeech.SpeakAsyncCancelAll();
+            speechMethods.UpdateVoiceSettings((string)cmboVoiceList.SelectedItem);
+            SpeechMethods.TextToSpeech.Resume();
         }
     }
 }
