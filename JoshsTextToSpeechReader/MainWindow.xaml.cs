@@ -94,13 +94,19 @@ namespace JoshsTextToSpeechReader
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Text Files|*.txt;*.*";
                 openFileDialog.Title = "Select a file";
                 openFileDialog.ShowDialog();
 
-                if (openFileDialog.FileName != "")
+                if (openFileDialog.FileName != "" && openFileDialog.FileName.Contains(".txt"))
                 {
                     path = openFileDialog.FileName;
                     txtDisplay.Text = menuMethods.GetImportedFile(path);
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("The file selected was not in .txt format",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception)
@@ -109,6 +115,11 @@ namespace JoshsTextToSpeechReader
                     "Something went wrong when trying to open the File. Please try again.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void MenuImportWebsite_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void MenuChangeFont_Click(object sender, RoutedEventArgs e)

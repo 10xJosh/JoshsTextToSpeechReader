@@ -15,7 +15,10 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="File" Grid.Row="0">
-                <MenuItem Header="Import" Click="MenuImport_Click"></MenuItem>
+                <MenuItem Header="Import">
+                    <MenuItem Header="Import From File..." Click="MenuImport_Click"></MenuItem>
+                    <MenuItem Header="Import From Website..." Click="MenuImportWebsite_Click"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Exit" Click="MenuExit_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Settings" Grid.Row="0">
