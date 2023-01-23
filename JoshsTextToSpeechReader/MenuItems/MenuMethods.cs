@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,6 +13,7 @@ namespace JoshsTextToSpeechReader.MenuItems
 {
     internal class MenuMethods
     {
+        public string FromWebsiteData { get; set; } = "Default data";
 
         public string GetImportedFile(string path)
         {
@@ -32,5 +34,11 @@ namespace JoshsTextToSpeechReader.MenuItems
                 "About", MessageBoxButton.OK, MessageBoxImage.None);
         }
 
+        public string FilterHTML(string input)
+        {
+            var userInput = Regex.Replace(input, "<.*?>|{.*?}|@font-face|\\(.*?\\);|&#[0-9];", "");
+
+            return userInput;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace JoshsTextToSpeechReader
         SpeechMethods speechMethods = new SpeechMethods();
         FrmChangeFont frmFontChange = new FrmChangeFont();
         FrmChangeVoice frmChangeVoice = new FrmChangeVoice();
+        FrmImportFromWebsite frmImportFromWebsite = new FrmImportFromWebsite();
 
         public string inputStorage { get; set; }
         public string path { get; set; }
@@ -28,6 +29,7 @@ namespace JoshsTextToSpeechReader
             SpeechMethods.TextToSpeech.SpeakProgress += SpeechHighlight;
             FrmChangeFont.GetChangedFontSettings += GetUpdatedFontSettings;
             FrmChangeVoice.VoiceChanged += ResetPlayButton;
+            FrmImportFromWebsite.FromWebsite += GetWebsiteData;
             
         }
 
@@ -105,8 +107,7 @@ namespace JoshsTextToSpeechReader
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("The file selected was not in .txt format",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
             catch (Exception)
@@ -119,7 +120,15 @@ namespace JoshsTextToSpeechReader
 
         private void MenuImportWebsite_Click(object sender, RoutedEventArgs e)
         {
-
+            if(frmImportFromWebsite == null || frmImportFromWebsite.IsDisposed)
+            {
+                FrmImportFromWebsite frmImportFromWebsite = new FrmImportFromWebsite();
+                frmImportFromWebsite.Show();
+            }
+            else
+            {
+                frmImportFromWebsite.Show();
+            }
         }
 
         private void MenuChangeFont_Click(object sender, RoutedEventArgs e)
@@ -191,6 +200,11 @@ namespace JoshsTextToSpeechReader
         {
             txtDisplay.Focus(); //this is required for the highlight feature to work
             txtDisplay.Select(e.CharacterPosition, e.Text.Length);
+        }
+
+        public void GetWebsiteData()
+        {
+            txtDisplay.Text = frmImportFromWebsite.WebsiteData;
         }
 
         public void ResetPlayButton()
